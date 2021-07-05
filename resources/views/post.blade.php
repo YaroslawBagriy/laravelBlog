@@ -7,10 +7,14 @@
         <title>My Blog</title>
 
         <link rel="stylesheet" href="/app.css">
-        <script src="/app.js"></script>
 
     </head>
     <body class="antialiased">
-        <h1>Hello World!</h1>
+        <article>
+            <h1><a href="post">My First Post</a></h1>
+            <p>Post text</p>
+        </article>
+
+        <a href="/">Go Back</a>
     </body>
 </html>
