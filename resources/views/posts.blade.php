@@ -10,17 +10,9 @@
 
     </head>
     <body class="antialiased">
-        <article>
-            <h1><a href="post">My First Post</a></h1>
-            <p>Post text</p>
-        </article>
-        <article>
-            <h1><a href="post">My Second Post</a></h1>
-            <p>Post text</p>
-        </article>
-        <article>
-            <h1><a href="post">My Third Post</a></h1>
-            <p>Post text</p>
-        </article>
+        <?php foreach ($posts as $post) : ?>
+            <article>
+            </article>
+        <?php endforeach; ?>
     </body>
 </html>
