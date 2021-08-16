@@ -11,8 +11,10 @@
     </head>
     <body class="antialiased">
         <article>
-            <h1><a href="post">My First Post</a></h1>
-            <p>Post text</p>
+            <h1><?= $post->title; ?></h1>
+            <div>
+                <?= $post->body; ?><
+            </div>
         </article>
 
         <a href="/">Go Back</a>

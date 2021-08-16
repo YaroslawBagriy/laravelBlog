@@ -7,19 +7,39 @@ use Illuminate\Support\Facades\File;
 
 class Post
 {
-    public static function all() {
-        $files = File::files(resource_path("posts/"));
+    public $title;
+    public $excerpt;
+    public $date;
+    public $body;
 
-        return array_map(function($file) {
-            return $file->getContents();
-        }, $files);
+    public function __construct($title, $excerpt, $date, $body) {
+        $this->title = $title;
+        $this->excerpt = $excerpt;
+        $this->date = $date;
+        $this->body = $body;
+    }
+
+    public static function all() {
+        return cache()->rememberForever('posts.all', function () {
+            return collect(File::files(resource_path("posts")))
+                ->map(function ($file) {
+                    return YamlFrontMatter::parseFile($file);
+                })
+                ->map(function ($document) {
+                    $document = YamlFrontMatter::parseFile($file);
+                    return new Post(
+                        $document->title,
+                        $document->excerpt,
+                        $document->date,
+                        $document->body(),
+                        $document->slug
+                    );
+                })
+                ->sortByDesc("date");
+        });
     }
 
     public static function find($slug) {
-        if (! file_exists($path = resource_path("posts/{$slug}.html"))) {
-            throw new ModelNotFoundException();
-        }
-    
-        return $post = cache()->remember("posts.{$slug}", 1200, fn() => file_get_contents($path));
+        return static::all()->firstWhere('slug', $slug);
     }
 }
