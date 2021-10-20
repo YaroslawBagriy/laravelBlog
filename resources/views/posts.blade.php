@@ -1,26 +1,14 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>My Blog</title>
-
-        <link rel="stylesheet" href="/app.css">
-
-    </head>
-    <body class="antialiased">
-        <?php foreach ($posts as $post) : ?>
+<x-layout>
+    @foreach ($posts as $post)
             <article>
                 <h1>
-                    <a href="/posts/<?= $post->slug; ?>">
-                        <?= $post->title; ?>
+                    <a href="/posts/{{ $post->slug }}">
+                        {{ $post->title }}
                     </a>
                 </h1>
                 <div>
-                    <?= $post->excerpt; ?>
+                    {{ $post->excerpt }}
                 </div>
             </article>
-        <?php endforeach; ?>
-    </body>
-</html>
+        @endforeach
+</x-layout>
