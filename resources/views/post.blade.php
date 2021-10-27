@@ -8,7 +8,7 @@
             </a>
         </p>
         <div>
-            {{ !! $post->body !! }}
+            {{ $post->body }}
         </div>
     </article>
 
