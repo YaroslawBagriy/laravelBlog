@@ -14,17 +14,7 @@ use App\Models\Post;
 |
 */
 
-Route::get('/', function () {
-    $posts = Post::latest();
-    if (request('search')) {
-        $post->where('title', 'like', '%' . request('search') . '%')
-        ->orwhere('body', 'like', '%' . request('search') . '%');
-    }
-
-    return view('posts', [
-        'posts' => $posts->get()
-    ]);
-})->name('home');
+Route::get('/', [PostsController::class, 'index'])->name('home');
 
 Route::get('posts/{post:slug}', function (Post $post) {
     return view('post', [
