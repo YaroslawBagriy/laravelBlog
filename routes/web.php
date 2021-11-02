@@ -15,8 +15,14 @@ use App\Models\Post;
 */
 
 Route::get('/', function () {
+    $posts = Post::latest();
+    if (request('search')) {
+        $post->where('title', 'like', '%' . request('search') . '%')
+        ->orwhere('body', 'like', '%' . request('search') . '%');
+    }
+
     return view('posts', [
-        'posts' => Post::latest('published_at')->with(['category', 'author'])->get()
+        'posts' => $posts->get()
     ]);
 })->name('home');
 
