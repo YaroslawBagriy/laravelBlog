@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+// Post eloquent model
 class Post extends Model
 {
     use HasFactory;
@@ -14,6 +15,13 @@ class Post extends Model
     protected $guarded = [];
 
     protected $with = ['category', 'author'];
+
+    public function scopeFilter($query, array $filters) {
+        $query->when($filter['search'] ?? false, function ($query, $search) {
+            $query->where('title', 'like', '%' . $search . '%')
+            ->orwhere('body', 'like', '%' . $search . '%');
+        });
+    }
 
     public function getRouteKeyName() {
         return 'slug';

@@ -16,11 +16,7 @@ use App\Models\Post;
 
 Route::get('/', [PostsController::class, 'index'])->name('home');
 
-Route::get('posts/{post:slug}', function (Post $post) {
-    return view('post', [
-        'post' => $post 
-    ]);
-});
+Route::get('posts/{post:slug}', [PostsController::class, 'show']);
 
 Route::get('categories/{category:slug}', function (Category $category) {
     return view('post', [
