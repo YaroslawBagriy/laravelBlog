@@ -10,7 +10,7 @@ class PostsController extends Controller
 {
     public function index() {
         return view('posts.index', [
-            'posts' => Post::latest()->filter(request(['search']))->get()
+            'posts' => Post::latest()->filter(request(['search', 'category', 'author']))->get()
         ]);
     }
 

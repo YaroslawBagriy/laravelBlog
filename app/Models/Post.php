@@ -27,6 +27,12 @@ class Post extends Model
                 $query->where('slug', $category);
             });
         });
+
+        $query->when($filter['author'] ?? false, function ($query, $author) {
+            $query->whereHas('Author', function ($query) {
+                $query->where('username', $author);
+            });
+        });
     }
 
     public function getRouteKeyName() {
