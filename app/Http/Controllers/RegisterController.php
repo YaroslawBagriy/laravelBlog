@@ -11,7 +11,7 @@ class RegisterController extends Controller
         return "";
     }
 
-    public function store() {
+    public function store() { 
         // Create the user + form validation
         $attributes = request()->validate([
             'name' => ['required' , 'max:255'],
@@ -22,6 +22,6 @@ class RegisterController extends Controller
 
         User::create($attributes);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'Your account has been created.');
     }
 }
